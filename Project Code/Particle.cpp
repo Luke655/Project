@@ -6,22 +6,9 @@ Particle::Particle() {
     velocity = {0,0};
     mass = 1;
     p.setRadius(radius);
-    p.setFillColor(Color::Yellow);
-    p.setOutlineThickness(3.f);
-    p.setOutlineColor(Color::White);
+    p.setFillColor(Color::White);
 }
 
-Particle::Particle(Vector2f position) {
-
-    p.setPosition(position);
-    position = position;;
-    velocity = {0,0};
-    mass = 1;
-    p.setRadius(radius);
-    p.setFillColor(Color::Black);
-    p.setOutlineThickness(3.f);
-    p.setOutlineColor(Color::White);
-}
 CircleShape Particle::getShape() {
     return p;
 }
@@ -74,7 +61,7 @@ void Particle::update(Time dt) {
     netForce = {0,0};
 }
 
-void Particle::checkCollision(Vector2f boundary) {
+void Particle::checkBoundary(Vector2i boundary) {
 
         if (position.x + radius < 0) {
 

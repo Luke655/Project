@@ -3,33 +3,23 @@
 #include <cmath>
 
 Engine::Engine() {
-    particles = new Particle*[250];
-}
-
-Particle* Engine::addParticle() {
-    particles[count] = new Particle;
-    count++;
-    return particles[count - 1];
-}
-
-void Engine::removeParticle(Particle p) {
-    p.~Particle();
 }
 
 void Engine::run() {
 
     //Render Window
-    RenderWindow window(VideoMode(1920,1080), "Physics Engine"); // sf::Style::Fullscreen
-    window.setPosition({0,0});
+    RenderWindow window(VideoMode(720,480), "Physics Engine"); // sf::Style::Fullscreen
+    window.setPosition({100,100});
     window.setFramerateLimit(FPS);
-    Vector2f boundary(window.getDefaultView().getSize());
+    Vector2i boundary(window.getDefaultView().getSize());
+    Grid grid(boundary);
 
-    //Initialise particle
-    for (int i = 0; i < 250; i++) {
-        particles[i] = addParticle();
-        particles[i]->setVelocity({rand() % 50, rand() % 20});
-        particles[i]->setPosition({rand() % (int)boundary.x, rand() % (int)boundary.y});
-    }
+    for (int i = 0; i < 100; i++) {
+        grid.addParticle();
+        grid.getParticle(i)->setPosition({rand() % boundary.x, rand() % boundary.y});
+        grid.getParticle(i)->setVelocity({rand() % 100, rand() % 100});
+    }    
+
     //Clock
     Clock clock;
 
@@ -45,19 +35,20 @@ void Engine::run() {
             }
         }
 
-        for (int p = 0; p < count; p++) {
+        for (int p = 0; p < grid.getNumParticles(); p++) {
 
-            particles[p]->update(dt);
-            particles[p]->checkCollision(boundary); 
+            grid.getParticle(p)->update(dt);
+            grid.getParticle(p)->checkBoundary(boundary); 
         }
     
         window.clear();
-        for (int j = 0; j < count; j++) {
-            window.draw(particles[j]->getShape());
+        for (int j = 0; j < grid.getNumParticles(); j++) {
+            window.draw(grid.getParticle(j)->getShape());
         }
         window.display();
 
     }
 }
 
-Engine::~Engine() {}
+Engine::~Engine() {
+}

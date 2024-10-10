@@ -2,7 +2,6 @@
 #define PARTICLE_H
 
 #include "SFML/Graphics.hpp"
-
 using namespace sf;
 
 class Particle: public Transformable {
@@ -10,7 +9,6 @@ class Particle: public Transformable {
         Particle();
         ~Particle();
 
-        Particle(Vector2f position);
         CircleShape getShape();
         Vector2f getPosition();
         Vector2f getVelocity();
@@ -24,7 +22,7 @@ class Particle: public Transformable {
 
         void update(Time dt);
         void applyForce(Vector2f force); 
-        void checkCollision(Vector2f bounds);
+        void checkBoundary(Vector2i bounds);
 
     private:
         Vector2f position;
