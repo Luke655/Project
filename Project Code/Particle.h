@@ -14,15 +14,14 @@ class Particle: public Transformable {
         Vector2f getVelocity();
         Vector2f getForce();
         float getRadius();
-        void setColor(float v);
 
         void setPosition(Vector2f pos);
         void setVelocity(Vector2f v);
         void setRadius(float r);
 
-        void update(Time dt);
-        void applyForce(Vector2f force); 
-        void checkBoundary(Vector2i bounds);
+        void update(Time dt); // Updates the particle for the given dt frame.
+        void applyForce(Vector2f force); // Applies a force in some direction on the particle.
+        void checkBoundary(Vector2i bounds); // Checks particle-boundary collisions.
 
     private:
         Vector2f position;
@@ -30,7 +29,7 @@ class Particle: public Transformable {
         Vector2f netForce;
         float mass;
 
-        float radius = 2.f;
+        float radius = 5.f;
         CircleShape p;
 };
 

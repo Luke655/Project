@@ -1,6 +1,5 @@
 #include "Engine.h"
 #include <iostream>
-#include <cmath>
 
 Engine::Engine() {
 }
@@ -11,13 +10,14 @@ void Engine::run() {
     RenderWindow window(VideoMode(720,480), "Physics Engine"); // sf::Style::Fullscreen
     window.setPosition({100,100});
     window.setFramerateLimit(FPS);
-    Vector2i boundary(window.getDefaultView().getSize());
+    Vector2i boundary({window.getDefaultView().getSize().x, window.getDefaultView().getSize().y});
     Grid grid(boundary);
 
     for (int i = 0; i < 100; i++) {
         grid.addParticle();
-        grid.getParticle(i)->setPosition({rand() % boundary.x, rand() % boundary.y});
-        grid.getParticle(i)->setVelocity({rand() % 100, rand() % 100});
+        Particle *p = grid.getParticle(i);
+        p->setPosition({rand() % boundary.x, rand() % boundary.y});
+        p->setVelocity({rand() % 100, rand() % 100});
     }    
 
     //Clock
@@ -36,9 +36,11 @@ void Engine::run() {
         }
 
         for (int p = 0; p < grid.getNumParticles(); p++) {
-
-            grid.getParticle(p)->update(dt);
-            grid.getParticle(p)->checkBoundary(boundary); 
+            Particle *particle = grid.getParticle(p);
+            particle->update(dt);
+            particle->checkBoundary(boundary); 
+            grid.checkCollisions(particle);
+            
         }
     
         window.clear();

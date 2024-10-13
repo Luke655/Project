@@ -13,7 +13,6 @@ class Engine {
         int FPS = 60;
         Time dt;
         Particle **particles;
-        int count = 0;
 };
 
 #endif

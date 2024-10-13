@@ -13,6 +13,8 @@ class Grid {
         Particle **getParticles(); // Returns the 'particles' array.
         int getNumParticles(); // Returns the number of particles in the 'particles' array.
         Particle *getParticle(int i); // Returns the ith particle in the 'particles' array.
+        void updateCells(); // Updates the cells to add/remove particles.
+        void checkCollisions(Particle *p1); // Checks the collisions between particles.
 
     private:
         float height;

@@ -2,6 +2,7 @@
 
 Particle::Particle() { 
 
+    setOrigin(radius, radius);
     position = {0,0};
     velocity = {0,0};
     mass = 1;
@@ -18,10 +19,9 @@ Vector2f Particle::getPosition() {
 }
 
 void Particle::setPosition(Vector2f pos) {
-    p.setPosition(pos);
-    position = pos;
+    position = {pos.x , pos.y};
+    p.setPosition(position);
 }
-
 
 Vector2f Particle::getVelocity() {
     return velocity;
@@ -43,10 +43,6 @@ Vector2f Particle::getForce() {
     return netForce;
 }
 
-void Particle::setColor(float v) {
-    p.setFillColor(Color::White);
-}
-
 void Particle::applyForce(Vector2f force) {
     netForce += force;
 }
@@ -63,20 +59,10 @@ void Particle::update(Time dt) {
 
 void Particle::checkBoundary(Vector2i boundary) {
 
-        if (position.x + radius < 0) {
-
-            velocity = {-velocity.x, velocity.y};
-
-        } else if (position.x + radius > boundary.x) {
-
-            velocity = {-velocity.x, velocity.y};
-
-        } else if (position.y + radius < 0) {
-
-            velocity = {velocity.x, - velocity.y};
-        } else if (position.y + radius > boundary.y) {
-
-            velocity = {velocity.x, - velocity.y};
+        if (position.x <= 0 || position.x + 2*radius >= boundary.x) {
+            velocity.x *= -1;
+        } else if (position.y <= 0 || position.y + 2*radius >= boundary.y) {
+            velocity.y *= -1;
         }
 }
 
