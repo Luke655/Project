@@ -2,6 +2,7 @@
 #define ENGINE_H
 
 #include "Grid.h"
+#include "Button.h"
 
 class Engine {
     public:

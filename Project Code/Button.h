@@ -8,12 +8,10 @@ class Button: public Interactable {
         Button();
         ~Button();
 
-        bool isOn(); 
-        void interact();
+        void setValue(); 
 
     private:
         bool value;
-        Vector2f size;
 };
 
 #endif

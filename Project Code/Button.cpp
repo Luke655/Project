@@ -7,11 +7,8 @@ Button::Button() {
 Button::~Button() {
 }
 
-bool Button::isOn() {
-    return value;
-}
-
-void Button::interact() {
+void Button::setValue() {
+   
     if (value == true) {
         value = false;
     } else {

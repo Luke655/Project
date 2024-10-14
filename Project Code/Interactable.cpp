@@ -23,4 +23,22 @@ Vector2f Interactable::getPosition() {
 
 void Interactable::setPosition(Vector2f position) {
     this->position = position;
+    shape.setPosition(position);
+}
+
+RectangleShape Interactable::getShape() {
+    return shape;
+}
+
+void Interactable::setColour(Color colour) {
+    shape.setFillColor(colour);
+}
+
+Vector2f Interactable::getSize() {
+    return size;
+}
+
+void Interactable::setSize(Vector2f size) {
+    this->size = size;
+    shape.setSize(size);
 }

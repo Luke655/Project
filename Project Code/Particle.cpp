@@ -8,6 +8,8 @@ Particle::Particle() {
     mass = 1;
     p.setRadius(radius);
     p.setFillColor(Color::White);
+    p.setOutlineColor(Color::Black);
+    p.setOutlineThickness(2.f);
 }
 
 CircleShape Particle::getShape() {

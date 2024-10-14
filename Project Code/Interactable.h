@@ -7,21 +7,26 @@ using namespace sf;
 
 class Interactable: public Transformable {
     public:
-    Interactable();
-    Interactable(std::string Title);
-    ~Interactable();
+        Interactable();
+        Interactable(std::string Title);
+        ~Interactable();
 
-    float getValue();
-    virtual void setValue(float value);
+        float getValue();
+        virtual void setValue() = 0;
+        Vector2f getPosition();
+        void setPosition(Vector2f position);
+        RectangleShape getShape();
+        void setColour(Color colour);
+        Vector2f getSize();
+        void setSize(Vector2f size);
+        
 
-    Vector2f getPosition();
-    void setPosition(Vector2f position);
-    
     private:
-    std::string Title;
-    float value;
-    Vector2f position;
-
+        std::string Title;
+        float value;
+        Vector2f position;
+        RectangleShape shape;
+        Vector2f size;
 };
 
 #endif

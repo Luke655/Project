@@ -49,7 +49,6 @@ void Grid::checkCollisions(Particle *p1) {
                 p1->setVelocity(p2->getVelocity());
                 p2->setVelocity(initialVelocity);
             }
-            
         }
     }
 }
