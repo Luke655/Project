@@ -7,16 +7,20 @@ Engine::Engine() {
 void Engine::run() {
 
     //Render Window
-    RenderWindow window(VideoMode(720,480), "Physics Engine"); // sf::Style::Fullscreen
+    RenderWindow window(VideoMode(1000,720), "Physics Engine"); // sf::Style::Fullscreen
     window.setPosition({100,100});
     window.setFramerateLimit(FPS);
-    Vector2i boundary({window.getDefaultView().getSize().x, window.getDefaultView().getSize().y});
-    Grid grid(boundary);
+    RectangleShape boundary(window.getDefaultView().getSize());
+    boundary.setPosition({0.f,0.f});
+    boundary.setOutlineThickness(2.f);
+    boundary.setOutlineColor(Color::White);
+    boundary.setFillColor(Color::Black);
+    Grid grid(boundary.getSize());
 
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 200; i++) {
         grid.addParticle();
         Particle *p = grid.getParticle(i);
-        p->setPosition({rand() % boundary.x, rand() % boundary.y});
+        p->setPosition({rand() % (int)boundary.getSize().x, rand() % (int)boundary.getSize().y});
         p->setVelocity({rand() % 100, rand() % 100});
     }    
 
@@ -25,25 +29,37 @@ void Engine::run() {
 
     //Run loop
     while (window.isOpen()) {
-        
-        dt = clock.restart();
 
         Event event;
         while (window.pollEvent(event)) {
-            if (event.type == Event::Closed) {
-                window.close();
+            switch (event.type) {
+
+                case Event::Closed:
+                    window.close();
+                    break;
+
+                case Event::KeyPressed:
+                    if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+                        window.close();
+                        break;
+                    }
+
+                default:
+                    break;
             }
+    
         }
 
         for (int p = 0; p < grid.getNumParticles(); p++) {
             Particle *particle = grid.getParticle(p);
-            particle->update(dt);
-            particle->checkBoundary(boundary); 
+            particle->update(FPS);
+            particle->checkBoundary(boundary.getSize()); 
             grid.checkCollisions(particle);
             
         }
     
         window.clear();
+        window.draw(boundary);
         for (int j = 0; j < grid.getNumParticles(); j++) {
             window.draw(grid.getParticle(j)->getShape());
         }

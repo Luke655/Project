@@ -10,7 +10,7 @@ class Engine {
         ~Engine();
 
     private:
-        int FPS = 60;
+        float FPS = 60.f;
         Time dt;
         Particle **particles;
 };

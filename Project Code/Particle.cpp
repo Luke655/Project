@@ -47,22 +47,33 @@ void Particle::applyForce(Vector2f force) {
     netForce += force;
 }
 
-void Particle::update(Time dt) {
+void Particle::update(float FPS) {
 
-    velocity += netForce * mass * dt.asSeconds();
-    position += velocity * dt.asSeconds();
+    velocity += netForce * mass / FPS;
+    position += velocity / FPS;
 
     p.setPosition(position);
 
     netForce = {0,0};
 }
 
-void Particle::checkBoundary(Vector2i boundary) {
+void Particle::checkBoundary(Vector2f boundary) {
 
         if (position.x <= 0 || position.x + 2*radius >= boundary.x) {
             velocity.x *= -1;
-        } else if (position.y <= 0 || position.y + 2*radius >= boundary.y) {
+            if (position.x >= boundary.x) {
+                position.x += boundary.x - position.x + radius;
+            } else if (position.x <= 0) {
+                position.x += 0.f -position.x + radius;
+            }
+        }
+        if (position.y <= 0 || position.y + 2*radius >= boundary.y) {
             velocity.y *= -1;
+            if (position.y >= boundary.y) {
+                position.y += boundary.y - position.y + radius;
+            } else if (position.y <= 0) {
+                position.y += 0.f -position.y + radius;
+            }
         }
 }
 

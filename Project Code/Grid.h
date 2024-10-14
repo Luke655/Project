@@ -5,7 +5,7 @@
 
 class Grid {
     public:
-        Grid(Vector2i boundary);
+        Grid(Vector2f boundary);
         ~Grid();
 
         Particle *addParticle(); // Adds a particle to the 'particles' array.
@@ -24,7 +24,7 @@ class Grid {
         Particle particle;
         int numParticles = 0;
         int numCells;
-        Particle **particles = new Particle*[100];
+        Particle **particles = new Particle*[200];
         Particle **cells;
 
 };

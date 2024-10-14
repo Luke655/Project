@@ -19,9 +19,9 @@ class Particle: public Transformable {
         void setVelocity(Vector2f v);
         void setRadius(float r);
 
-        void update(Time dt); // Updates the particle for the given dt frame.
+        void update(float FPS); // Updates the particle for the given dt frame.
         void applyForce(Vector2f force); // Applies a force in some direction on the particle.
-        void checkBoundary(Vector2i bounds); // Checks particle-boundary collisions.
+        void checkBoundary(Vector2f bounds); // Checks particle-boundary collisions.
 
     private:
         Vector2f position;
