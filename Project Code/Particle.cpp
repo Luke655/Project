@@ -57,22 +57,22 @@ void Particle::update(float FPS) {
     netForce = {0,0};
 }
 
-void Particle::checkBoundary(Vector2f boundary) {
+void Particle::checkBoundary(RectangleShape boundary) {
 
-        if (position.x <= 0 || position.x + 2*radius >= boundary.x) {
+        if (position.x <= boundary.getPosition().x || position.x + 2*radius >= boundary.getPosition().x + boundary.getSize().x) {
             velocity.x *= -1;
-            if (position.x >= boundary.x) {
-                position.x += boundary.x - position.x + radius;
-            } else if (position.x <= 0) {
-                position.x += 0.f -position.x + radius;
+            if (position.x + radius >= boundary.getSize().x + boundary.getPosition().x) {
+                position.x -= boundary.getPosition().x + boundary.getSize().x - position.x + radius;
+            } else if (position.x - radius <= boundary.getPosition().x) {
+                position.x += boundary.getPosition().x - position.x + radius;
             }
         }
-        if (position.y <= 0 || position.y + 2*radius >= boundary.y) {
+        if (position.y <= boundary.getPosition().y || position.y + 2*radius >= boundary.getSize().y + boundary.getPosition().y) {
             velocity.y *= -1;
-            if (position.y >= boundary.y) {
-                position.y += boundary.y - position.y + radius;
-            } else if (position.y <= 0) {
-                position.y += 0.f -position.y + radius;
+            if (position.y + radius >= boundary.getPosition().y + boundary.getSize().y) {
+                position.y -= boundary.getPosition().y + boundary.getSize().y - position.y + radius;
+            } else if (position.y - radius <= boundary.getPosition().y) {
+                position.y += boundary.getPosition().y - position.y + radius;
             }
         }
 }

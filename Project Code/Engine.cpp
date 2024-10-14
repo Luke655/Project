@@ -7,11 +7,11 @@ Engine::Engine() {
 void Engine::run() {
 
     //Render Window
-    RenderWindow window(VideoMode(1000,720), "Physics Engine"); // sf::Style::Fullscreen
+    RenderWindow window(VideoMode(1080,720), "Physics Engine"); // sf::Style::Fullscreen
     window.setPosition({100,100});
     window.setFramerateLimit(FPS);
-    RectangleShape boundary(window.getDefaultView().getSize());
-    boundary.setPosition({0.f,0.f});
+    RectangleShape boundary({540, 700});
+    boundary.setPosition({20.f,10.f});
     boundary.setOutlineThickness(2.f);
     boundary.setOutlineColor(Color::White);
     boundary.setFillColor(Color::Black);
@@ -23,9 +23,6 @@ void Engine::run() {
         p->setPosition({rand() % (int)boundary.getSize().x, rand() % (int)boundary.getSize().y});
         p->setVelocity({rand() % 100, rand() % 100});
     }    
-
-    //Clock
-    Clock clock;
 
     //Run loop
     while (window.isOpen()) {
@@ -53,9 +50,8 @@ void Engine::run() {
         for (int p = 0; p < grid.getNumParticles(); p++) {
             Particle *particle = grid.getParticle(p);
             particle->update(FPS);
-            particle->checkBoundary(boundary.getSize()); 
+            particle->checkBoundary(boundary); 
             grid.checkCollisions(particle);
-            
         }
     
         window.clear();
