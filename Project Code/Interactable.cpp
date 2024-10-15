@@ -1,12 +1,11 @@
 #include "Interactable.h"
 
 Interactable::Interactable() {
-    this->Title = "";
     this-> value = 0;
 }
 
-Interactable::Interactable(std::string Title) {
-    this->Title = Title;
+Interactable::Interactable(String title) {
+    this->title.setString(title);
     this->value = 0;
 }
 
@@ -41,4 +40,13 @@ Vector2f Interactable::getSize() {
 void Interactable::setSize(Vector2f size) {
     this->size = size;
     shape.setSize(size);
+}
+
+Text Interactable::getTitle() {
+    return title;
+}
+
+void Interactable::setTitle(String title) {
+    this->title.setString(title);
+    this->title.setColor(Color::Yellow);
 }

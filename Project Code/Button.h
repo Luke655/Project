@@ -8,10 +8,14 @@ class Button: public Interactable {
         Button();
         ~Button();
 
-        void setValue(); 
+        void setValue(bool value);
+        void interact();
+        void setTitlePosition(Vector2f position);
+        bool getValue();
 
     private:
         bool value;
+        Text title = Interactable::getTitle();
 };
 
 #endif
