@@ -4,11 +4,6 @@ Interactable::Interactable() {
     this-> value = 0;
 }
 
-Interactable::Interactable(String title) {
-    this->title.setString(title);
-    this->value = 0;
-}
-
 Interactable::~Interactable() {
 }
 
@@ -45,8 +40,12 @@ void Interactable::setSize(Vector2f size) {
 Text Interactable::getTitle() {
     return title;
 }
-
-void Interactable::setTitle(String title) {
+void Interactable::setTitle(std::string title) {
+    font.loadFromFile("arial.ttf");
     this->title.setString(title);
-    this->title.setColor(Color::Yellow);
+    this->title.setPosition({position.x + 0.2f * size.x, position.y + 0.33f * size.y});
+    this->title.setFont(font);
+    this->title.setCharacterSize(24U);
+    this->title.setFillColor(Color::Black);
+    this->title.setStyle(Text::Bold);
 }

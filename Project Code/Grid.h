@@ -2,6 +2,7 @@
 #define GRID_H
 
 #include "Particle.h"
+#include <cmath>
 
 class Grid {
     public:
@@ -24,7 +25,7 @@ class Grid {
         Particle particle;
         int numParticles = 0;
         int numCells;
-        Particle **particles = new Particle*[200];
+        Particle **particles = new Particle*[400];
         Particle **cells;
 
 };

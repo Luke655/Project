@@ -8,14 +8,12 @@ class Button: public Interactable {
         Button();
         ~Button();
 
-        void setValue(bool value);
-        void interact();
-        void setTitlePosition(Vector2f position);
-        bool getValue();
+        void interact(); // Turns the button on/off.
+        bool getValue(); // Returns the state of the button.
+        void setValue(bool value); // Sets a definite value for the button.
 
     private:
         bool value;
-        Text title = Interactable::getTitle();
 };
 
 #endif

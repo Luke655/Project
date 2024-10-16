@@ -3,16 +3,16 @@
 
 #include "Grid.h"
 #include "Button.h"
+#include "Slider.h"
 
 class Engine {
     public:
         Engine();
-        void run();
+        void run(); // Starts the program.
         ~Engine();
 
     private:
         float FPS = 60.f;
-        Time dt;
         Particle **particles;
 
 };

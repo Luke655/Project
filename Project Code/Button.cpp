@@ -2,7 +2,6 @@
 
 Button::Button() {
     value = false;
-    title.setPosition(getPosition());
 }
 
 Button::~Button() {
@@ -18,10 +17,6 @@ void Button::interact() {
     } else {
         value = true;
     }
-}
-
-void Button::setTitlePosition(Vector2f position) {
-    title.setPosition(position);
 }
 
 bool Button::getValue() {

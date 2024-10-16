@@ -51,7 +51,8 @@ void Particle::applyForce(Vector2f force) {
 
 void Particle::update(float FPS) {
 
-    velocity += netForce * mass / FPS;
+    acceleration = netForce / mass;
+    velocity += acceleration / FPS;
     position += velocity / FPS;
 
     p.setPosition(position);

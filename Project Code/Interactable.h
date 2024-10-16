@@ -8,20 +8,18 @@ using namespace sf;
 class Interactable: public Transformable {
     public:
         Interactable();
-        Interactable(String title);
         ~Interactable();
 
-        float getValue();
-        virtual void interact() = 0;
-        Vector2f getPosition();
-        void setPosition(Vector2f position);
-        RectangleShape getShape();
-        void setColour(Color colour);
-        Vector2f getSize();
-        void setSize(Vector2f size);
-        Text getTitle();
-        void setTitle(String title);
-        virtual void setTitlePosition(Vector2f position) = 0;
+        float getValue(); // Returns the value of the interactable.
+        virtual void interact() = 0; // Registers a user imput on the interactable.
+        Vector2f getPosition(); // Returns the position.
+        void setPosition(Vector2f position); // Sets a new position.
+        RectangleShape getShape(); // Returns the shape of the interactable.
+        void setColour(Color colour); // Sets the fill colour for the interactable.
+        Vector2f getSize(); // Returns the size.
+        void setSize(Vector2f size); // Sets a new size.
+        Text getTitle(); // Returns the title of the interactable.
+        void setTitle(std::string title); // Sets the title of the interactable.
 
     private:
         Text title;
@@ -30,6 +28,7 @@ class Interactable: public Transformable {
         Vector2f position;
         RectangleShape shape;
         Vector2f size;
+        Font font;
 };
 
 #endif
